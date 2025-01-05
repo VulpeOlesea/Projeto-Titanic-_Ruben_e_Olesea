@@ -9,6 +9,7 @@
 /*-------------- Geral ----------------- */
 body{
     background-color: aliceblue;
+    overflow-x: hidden;
 }
 
 header{
