@@ -1,0 +1,288 @@
+/*
+=====================================================================
+*   Trabalho de Grupo: Projeto #1 - Análise de dados do Titanic
+*   UFCD: 5417 - Programação para a WEB - Servidor (server-side)
+*   Turma: TPSI PL 1223
+*   Formador: Nelson Santos
+*   Formandos: Olesea Vulpe, Rúben Fonseca
+===================================================================== */
+/*-------------- Geral ----------------- */
+body{
+    background-color: aliceblue;
+}
+
+header{
+    background-color: black;
+}
+
+/* Todas as imagens */
+.pics{
+    width: 100%;
+}
+
+.dropdown-menu {
+    --bs-dropdown-link-active-bg: none;
+}
+.conteiner{
+    position: relative;
+}
+
+/* Texto */
+p {font-size: 1rem;}
+
+#titulo_1{
+    color: #7f6a34; 
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+li{
+    margin: 1rem 0;
+}
+
+/* Icons */
+.bi{
+    color:#7f6a34;
+    font-size: 2rem;
+    margin: 1.5rem;
+} 
+
+/* Cores dos background e texto*/
+#section_1, #section_3, #section_5, #section_7, #section_9, #section_11{
+    color: rgba(246, 248, 251, 0.736);
+    background-color: #00181e;         
+}
+
+#section_1 h3,h4, #section_3 h3,h4, #section_5 h3,h4, #section_7 h3,h4, #section_9 h3,h4, #section_11 h3,h4 {
+    color: #fff;
+}
+
+#section_2 h3,h4, #section_4 h3,h4, #section_6 h3,h4, #section_8 h3,h4, #section_10 h3,h4 {
+    color: #7f6a34;
+}
+
+/* Botão */
+.btn-dark{
+    padding: 0.5rem 2rem;
+    margin: 1.5rem;
+    background-color: transparent;
+    border: 1px solid #7f6a34;
+    border-radius: 3px;
+    color: #7f6a34;
+}
+
+.btn-dark:hover{
+    background-color: #7f6a34;
+    color: #00181e;
+}
+
+/*-------------- Header ----------------- */
+
+#titulo{
+    color: rgba(240, 248, 255, 0.63);
+    font-size: 9vw;
+    display: flex;
+    height: 35vw;
+    justify-content: center;
+    align-items: center;
+ }
+
+/*-------Section 1: Introdução -------- */
+
+.profile-pic {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+ }
+
+/*-------Section 2: Sobre "Titanic" -------- */
+
+#container1 {
+    display: flex;
+    align-items: center;
+    min-height: 50vh;
+}
+            
+#carousel, #navigation {
+    flex: initial;
+    display: block;
+}
+            
+#carousel {
+    overflow: hidden;
+    width: 600px;
+    height: 450px;
+    border-radius: 4px;
+    background-color: #00181e30;
+}
+            
+.p-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.4s ease-in-out;
+}
+            
+#button_a:checked ~ #carousel .p-wrapper {
+    -webkit-transform: translateY(0);
+    transform: translateY(0); 
+}
+            
+#button_b:checked ~ #carousel .p-wrapper {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%); 
+}
+
+#button_c:checked ~ #carousel .p-wrapper {
+    -webkit-transform: translateY(-200%);
+    transform: translateY(-200%); 
+}
+
+#button_d:checked ~ #carousel .p-wrapper {
+    -webkit-transform: translateY(-300%);
+    transform: translateY(-300%); 
+}
+            
+[class^="panel_"] {
+    overflow: auto;
+    position: relative;
+    width: inherit;
+    height: inherit;
+    padding: 48px;
+}
+            
+#navigation {
+    margin-left: 24px;
+}
+
+[class^="label_"] {
+    display: block;
+    cursor: pointer;
+    margin: 8px 0;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 4px;
+    color: #aaa;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+            
+[class^="label_"]:hover {
+    color: #fff;
+    background-color: #7f6a34;
+}
+            
+#button_a:checked ~ #navigation .label_a,
+#button_b:checked ~ #navigation .label_b,
+#button_c:checked ~ #navigation .label_c,
+#button_d:checked ~ #navigation .label_d {
+     cursor: default;
+     color: #fff;
+     background-color: #00181e;
+}
+
+/* Scroll */
+::-webkit-scrollbar {
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+}
+
+::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    min-height: 48px;
+    min-width: 48px;
+    background-clip: padding-box;
+    background-color: #444;
+    border: 8px solid #fff;
+}
+
+::-webkit-scrollbar-track {
+    border: 8px solid #fff;
+    background-color: rgba(0, 0, 0, .05);
+}
+
+/*-------Section 6: Visualização de dados ------------- */
+
+/* Cor dos botões */
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link { background-color: #7f6a34; }
+.nav {--bs-nav-link-hover-color: none;}
+.nav-link{ color: #7f6a34;}
+.nav-pills {
+    color: #7f6a34;
+    width: 25rem;
+}
+
+#section_6 .d-flex {
+    justify-content: center;
+}
+
+/*-------Section 8: Accordion --------------- */
+
+.accordion {
+    --bs-accordion-bg: aliceblue;
+    --bs-accordion-btn-bg: #b3c4c8;
+    --bs-accordion-btn-padding-y: 0rem;
+}
+
+.accordion-button{
+    color: #00181e;
+    font-size: 1.5rem;
+    --bs-accordion-btn-color: aliceblue;
+    --bs-accordion-active-color: aliceblue;
+    --bs-accordion-active-bg: #00181e;
+    --bs-accordion-btn-focus-box-shadow: none;
+}
+
+#accordion{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/*-------Section 10: Conclusões ------------- */
+
+#section_10{
+    background-image: url('/img/banner.jpg');
+    background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	color: white;
+	flex-grow: 1;
+}
+
+#conclusion{
+    background-color: #00181ede;
+}
+
+/*-------Section 11: Sobre nós ------------- */
+
+/* Mapa responsiva */
+.map-responsive{
+    overflow:hidden;
+    padding-bottom:80.25%;
+    position:relative;
+    height:0;
+}
+.map-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+
+/*-------Footer ---------------------------- */
+
+footer{ background-color: #b3c4c8;}

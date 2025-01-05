@@ -1,0 +1,838 @@
+<!--
+=====================================================================
+*   Trabalho de Grupo: Projeto #1 - Análise de dados do Titanic
+*   UFCD: 5417 - Programação para a WEB - Servidor (server-side)
+*   Turma: TPSI PL 1223
+*   Formador: Nelson Santos
+*   Formandos: Olesea Vulpe, Rúben Fonseca
+=====================================================================-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TITANIC</title>
+    
+    <!-- Bootstrap
+    ================================================== -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- CSS
+    ================================================== -->
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- Header
+   ================================================== -->
+   <header>
+    <!-- Navbar ------------------------------------  -->
+   
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Tenth navbar example">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"><b>Home</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#section_1"><b>Introdução</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#section_2"><b>Sobre "Titanic"</b></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#section_3" data-bs-toggle="dropdown" aria-expanded="false"><b>Análise de dados</b></a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#section_3">Leitura e exploração dos dados</a></li>
+                <li><a class="dropdown-item" href="#section_4">Limpeza e pré-processamento de dados</a></li>
+                <li><a class="dropdown-item" href="#section_5">Análise e manipulação de dados</a></li>
+                <li><a class="dropdown-item" href="#section_6">Visualização de dados</a></li>
+                <li><a class="dropdown-item" href="#section_7">Exportação dos resultados</a></li>
+                <li><a class="dropdown-item" href="#section_8">Armazenamento numa Base de Dados</a></li>
+                <li><a class="dropdown-item" href="#section_9">Análise Adicional</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#section_10"><b>Conclusões</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#section_11"><b>Sobre nós</b></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Banner ------------------------------------  -->
+
+    <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class="active" aria-current="true"></button>
+      </div>
+      <!-- ------ Slide 1 ---------------------------  -->
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="./img/banner.jpg" class="opacity-50" width="100%" height="100%">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 id="titulo">TITANIC</h1>
+              <h3 class="opacity-75">Este trabalho foi realizado por Olesea Vulpe e Rúben Fonseca.</h3>
+            </div>
+          </div>
+        </div>
+        <!-- ----- Slide 2 ---------------------------  -->
+        <div class="carousel-item">
+          <img src="./img/banner.jpg" class="opacity-50" width="100%" height="100%">
+          <div class="container">
+            <div class="carousel-caption text-end">
+              <h1>Sobre projeto</h1>
+              <p><b>Análise de dados de passageiros do Titanic</b></p>
+              <p>
+                Explore a sobrevivência, as classes, a idade e muito mais com o Python.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ----- As setas ---------------------------  -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+   </header> <!-- End Header -->
+
+  <main>
+
+<!-- Introdução / Section 1
+   ================================================== -->
+    <section id="section_1">
+      <div class="container px-4 py-5">
+        <div class="row">
+
+          <!-- Coluna da esquerda -->
+          <div class="col-md-4">
+              <p><img class="profile-pic" src="img/profilepic.jpeg" alt="ATEC" /></p>
+              <p><b>TPSI PL 1223 | Curso de Técnico/a Especialista em Tecnologias e Programação de Sistemas de Informação</b></p> 
+              <br><p><b>UFCD 5417 - Programação para a WEB - Servidor (server-side)</b></p>
+          </div>
+  
+          <!-- Coluna da direita -->
+          <div class="col-md-8">
+            <h2 id="titulo_1">Introdução</h2>
+
+              <p>
+              Este projeto foi proposto e orientado pelo formador Nelson Santos em contexto da UFCD 5417 - Programação para a WEB - Servidor (server-side). Trata-se de um projeto cujo objetivo é explorar e compreender os fatores que influenciaram a sobrevivência dos passageiros do «Titanic», analisando o conjunto de dados que contém informações detalhadas sobre os passageiros e sobreviventes do desastre ocorrido em 1912. Para isso, foram aplicados conhecimentos de análise de dados utilizando Python.
+              </p>
+              <p>
+              Com o auxílio das bibliotecas Pandas e Matplotlib, realizámos uma análise descritiva e exploratória dos dados. Este relatório documenta todas as etapas do trabalho, desde a exploração inicial dos dados até à geração de gráficos que ilustram padrões relevantes, e apresenta os resultados obtidos bem como as conclusões extraídas.
+              </p>
+              <p>
+              O presente relatório está estruturado em várias etapas. Inicialmente, é feita uma descrição geral do conjunto de dados «Titanic», detalhando as variáveis e a sua relevância para a análise. Em seguida, passamos para o pré-processamento dos dados, que inclui a identificação e o tratamento de valores em falta, bem como a criação de novas variáveis para suportar a análise. Posteriormente, descrevemos a análise exploratória realizada, com destaque para a relação entre as variáveis (classe, idade, sexo, entre outras) e a sobrevivência.
+              </p>
+              <p>
+              Nas etapas finais, apresentamos os gráficos e tabelas gerados, juntamente com as principais conclusões, como a maior taxa de sobrevivência de mulheres e crianças em comparação com homens adultos. Finalmente, no capítulo de conclusões, refletimos sobre os métodos utilizados, os desafios encontrados e as aprendizagens adquiridas ao longo deste trabalho.
+              </p>
+              <p>
+              Os principais métodos utilizados neste projeto incluem a manipulação e agregação de dados com Pandas, a visualização de padrões e tendências com Matplotlib, e o armazenamento dos resultados numa base de dados estruturada, garantindo a possibilidade de futuras análises.
+              </p>
+  
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Sobre "Titanic" / Section 2
+   ================================================== -->
+   <section id="section_2">
+    <div class="container px-4 py-5">
+      <h2 id="titulo_1">História do Titanic</h2>
+      <div class="row">
+
+        <!-- Coluna da esquerda -->
+        <div class="col-md-6 px-4 py-3">
+          <img class="pics" src="./img/sec_2.jpg">
+        </div>
+
+        <!-- Coluna da direita-->
+        <div class="col-md-6">
+          <div id="container1">
+            <input hidden type="radio" name="carousel-control" id="button_a" checked/>
+            <input hidden type="radio" name="carousel-control" id="button_b"/>
+            <input hidden type="radio" name="carousel-control" id="button_c"/>
+            <input hidden type="radio" name="carousel-control" id="button_d"/>            
+            
+            <div id="carousel">
+                <div class="p-wrapper">
+                          
+                  <section class="panel_a">
+                    <h2 class="fw-bold text-body-emphasis">RMS Titanic</h2>
+                    <p>O RMS Titanic foi um navio de passageiros britânico operado pela White Star Line e construído pelos estaleiros da Harland and Wolff, em Belfast. Segunda embarcação da Classe Olympic de transatlânticos, depois do RMS Olympic e seguido pelo HMHS Britannic, foi projetado pelos engenheiros navais Alexander Carlisle e Thomas Andrews. Sua construção começou em março de 1909 e seu lançamento ao mar ocorreu em maio de 1911. O Titanic foi pensado para ser o navio mais luxuoso e mais seguro de sua época, gerando lendas que era supostamente "inafundável".</p>
+                    <p><img class="pics" src="./img/titanic.jpg"></p>
+                    <p>A embarcação partiu em sua viagem inaugural de Southampton com destino a Nova Iorque em 10 de abril de 1912, no caminho passando em Cherbourg-Octeville, na França, e por Queenstown, na Irlanda. Colidiu com um iceberg na proa do lado direito às 23h40 de 14 de abril, naufragando na madrugada do dia seguinte, com mais de 1 500 pessoas a bordo, sendo um dos maiores desastres marítimos em tempos de paz de toda a história. Seu naufrágio destacou vários pontos fracos do projeto, deficiências nos procedimentos de evacuação de emergência e falhas nas regulamentações marítimas. Comissões de inquérito foram instauradas nos Estados Unidos e no Reino Unido, acarretando mudanças nas leis internacionais de navegação, que permanecem em vigor mais de um século depois.</p>
+                  </section>
+                          
+                  <section class="panel_b">
+                      <h2 class="fw-bold text-body-emphasis">Cronologia Resumida</h2>
+                      <ul>
+                        <li>31 de março de 1909: Início da construção do Titanic nos estaleiros da Harland and Wolff, em Belfast, Irlanda do Norte.</li>
+                        <li>31 de maio de 1911: O casco do Titanic é lançado ao mar. Inicia-se o trabalho de acabamento e instalação dos interiores.</li>
+                        <li>10 de abril de 1912: O Titanic parte de Southampton, Inglaterra, em sua viagem inaugural, com escalas em Cherbourg (França) e Queenstown (atual Cobh, Irlanda).</li>
+                        <li>14 de abril de 1912, 23h40: O Titanic colide com um iceberg no Oceano Atlântico Norte, danificando gravemente o casco do navio.</li>
+                        <li>15 de abril de 1912, 00h05: Os primeiros botes salva-vidas começam a ser lançados ao mar, apesar de não haver capacidade suficiente para todos os passageiros e tripulantes.</li>
+                        <li>15 de abril de 1912, 02h20: O Titanic parte-se em dois e afunda completamente, levando mais de 1.500 vidas. Apenas cerca de 700 pessoas sobrevivem, sendo resgatadas pelos botes salva-vidas.</li>
+                        <li>18 de abril de 1912: O navio RMS Carpathia chega a Nova Iorque com os sobreviventes resgatados.</li>
+                        <li>1985: Os destroços do Titanic são encontrados no fundo do oceano, a uma profundidade de cerca de 3.800 metros.</li>
+                    </ul>
+                    <p>O naufrágio do Titanic continua a ser um dos eventos mais estudados e lembrados da história moderna, destacando as falhas de segurança, como a insuficiência de botes salva-vidas, e marcando uma mudança nas regulamentações marítimas internacionais.</p>
+                  </section>
+                          
+                  <section class="panel_c">
+                    <h2 class="fw-bold text-body-emphasis">Passageiros</h2>
+                    <p>O Titanic partiu em sua primeira e única viagem com 1 316 passageiros a bordo: 325 na primeira classe, 285 na segunda e 706 na terceira. Deles, 922 embarcaram em Southampton, 274 em Cherbourg-Octeville na França e 120 em Queenstown na Irlanda. Na primeira classe estavam os passageiros mais ricos do navio, dentre eles empresários, artistas, oficiais militares, políticos e outros. Em muitos casos eles viajaram com várias malas de bagagem e um ou mais criados particulares. Dentre as personalidades da primeira classe pode-se destacar Joseph Bruce Ismay, presidente da White Star Line, e Thomas Andrews, um dos engenheiros do navio. Ambos viajaram a fim de observar possíveis defeitos que poderiam ocorrer e melhorias que poderiam ser aplicadas no Britannic. O passageiro mais rico a bordo era John Jacob Astor IV, um militar, escritor, inventor e empresário norte-americano, que viajava junto de sua esposa Madeleine. Outros passageiros detentores de grandes fortunas incluíam Margaret Brown, Benjamin Guggenheim, Jacques Futrelle, Cosmo Duff-Gordon, Archibald Gracie e o tenista Richard Norris Williams. Archibald Butt, um dos assessores do presidente William Howard Taft, também fez a travessia a bordo do Titanic para retornar aos Estados Unidos a fim de se preparar para as eleições presidenciais.[53] John Pierpont Morgan, banqueiro e empresário norte-americano, também deveria ter viajado no Titanic, porém desistiu de última hora para comemorar o aniversário de sua amante em Aix-les-Bains, na França.</p>                    
+                    <p>A segunda classe era mais diversificada e incluía empresários, professores, clérigos e imigrantes, por vezes ricos, que retornavam ao seu país natal. Dentre eles é possível destacar Lawrence Beesley, um jornalista e escritor britânico que depois do naufrágio publicaria um dos primeiros relatos do desastre, The Loss of the SS Titanic. Também na segunda classe estava a família Navratil: o pai Michel e os filhos bebês Michel Marcel e Edmond. Eles foram registrados ao embarcarem como "família Hoffman" e para os outros passageiros eram um pai viúvo com seus dois filhos pequenos. Entretanto, Michel Navratil na verdade havia perdido a custódia das crianças para sua ex-esposa mas decidiu fugir com eles para os Estados Unidos; Michel morreu no naufrágio, porém Michel Marcel e Edmond sobreviveram e ficaram conhecidos como os "órfãos do Titanic".</p>
+                    <p>Por fim, a terceira classe era onde estavam os imigrantes, pessoas que muitas vezes viajavam em grandes grupos familiares de até doze membros. Eles vinham de diferentes partes da Europa como Escandinávia, Leste Europeu, Irlanda e até mesmo da Ásia. Antes do embarque todos foram sujeitos a controles sanitários pois os regulamentos de imigração norte-americana eram bem rigorosos para evitar contaminação. A terceira classe era a única a ser obrigada a passar por esses exames, também estando previsto que novas examinações fossem realizadas assim que chegassem a Nova Iorque.</p>
+                  </section>
+                </div>
+            </div> 
+                    
+            <div id="navigation">
+                <label for="button_a" class="label_a"> <span>- 1 -</span> </label>
+                <label for="button_b" class="label_b"> <span>- 2 -</span> </label>
+                <label for="button_c" class="label_c"> <span>- 3 -</span> </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Análise de dados: -->
+
+<!-- Leitura e exploração dos dados / Section 3
+   ================================================== -->
+    <section id="section_3">
+      <div class="container px-4 py-5">
+        <h2 id="titulo_1">Análise de dados</h2><hr>
+        <div class="row">
+
+          <!-- Coluna da esquerda -->
+          <div class="col-md-6 px-4 py-3">
+            <h3>Leitura e exploração dos dados:</h3>
+            <p>Como o objetivo deste projeto era explorar e analisar o conjunto de dados do "Titanic", que contém informações detalhadas sobre um subconjunto de passageiros do navio, como idade, sexo, classe de embarque e outros fatores, recebemos uma lista de passageiros de amostra de aproximadamente 400 pessoas, o que é suficientemente representativo para análise educativa e exploratória.
+            </p>
+            <div class="text-center">
+              <img class="pics" src="./img/csv.png">
+              <a href="https://github.com/VulpeOlesea/Projeto1_Ruben_e_Olesea/blob/main/titanic.csv" target="_blank"><button class="btn-dark">Download do ficheiro</button></a>
+            </div>
+            <br>
+            <h3><i>O objetivo do exercício:</i></h3>
+            <p><i>Neste exercício, o objetivo inicial é pré-ler e explorar os dados. Isto inclui carregar um ficheiro CSV utilizando a biblioteca Pandas, visualizar os registos superiores e inferiores e executar análises descritivas e estruturais utilizando as funções: .describe() e .info().</i></p>
+          </div>
+          <!-- Coluna da direita-->
+          <div class="col-md-6 px-4 py-3">
+            <div>
+
+              <i class="bi bi-1-square d-flex justify-content-center"></i>
+              <p> O conjunto de dados foi carregado a partir de um ficheiro CSV "titanic.csv" utilizando a biblioteca Pandas:</p>
+              <p><img class="pics" src="./img/ex1_1.png"></p>
+
+              <i class="bi bi-2-square d-flex justify-content-center"></i>
+              <p> Foram visualizados os primeiros e últimos registros para entender a estrutura e conteúdo dos dados:</p>
+              <p><img class="pics" src="./img/ex1_2.png"></p>
+              <p>Resultado:</p>
+              <p><img class="pics" src="./img/res1_2.png"></p>
+
+              <i class="bi bi-3-square d-flex justify-content-center"></i>
+              <p> Uma análise inicial foi conduzida com as funções <i>.describe()</i> e <i>.info()</i> para identificar as características principais e possíveis inconsistências nos dados:</p>
+              <p><img class="pics" src="./img/ex1_3.png"></p>
+              <p>Resultado:</p>
+              <p><img class="pics" src="./img/res1_3.png"></p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Limpeza e pré-processamento de dados / Section 4
+   ================================================== -->
+    <section id="section_4">
+      <div class="container px-4 py-5">
+        <h3 class="text-center">Limpeza e pré-processamento de dados</h3>
+        <div class="row">
+
+          <!-- Coluna da esquerda -->
+          <div class="col-md-6 px-4 py-3">
+            <h3><i>O objetivo do exercício:</i></h3>
+            <p><i>O objetivo deste exercício é preparar os dados do conjunto “Titanic” para uma análise eficiente e precisa, aplicando técnicas de limpeza e pré-processamento.</i></p>
+          </div>
+          <!-- Coluna da direita-->
+          <div class="col-md-6 px-4 py-3"></div>
+          <hr>
+          <i class="bi bi-1-square d-flex justify-content-center"></i>
+          <!-- Coluna da esquerda -->
+          <div class="col-md-6 px-4 py-3">
+            <p>
+              Valores nulos foram identificados e tratados:
+              <ul>
+                <li>A coluna "Age" teve os valores nulos preenchidos com a mediana das idades.</li>
+                <li>A coluna "Cabin", com uma grande proporção de valores ausentes, foi descartada da análise principal.</li>
+                <li>Preencher valores nulos de "Fare" com 0.</li>
+              </ul>
+            </p>
+            
+          </div>
+          <!-- Coluna da direita -->
+          <div class="col-md-6 px-4 py-3">
+            <p><img class="pics" src="./img/ex2_1.png"></p>
+          </div>
+          <hr>
+          <i class="bi bi-2-square d-flex justify-content-center"></i>
+          <!-- Coluna da esquerda -->
+          <div class="col-md-7 px-4 py-3">
+            <p>Para criar uma nova coluna Idade_Milissegundos, que converteu a idade dos passageiros para milissegundos desde o Epoch (1 de Janeiro de 1970), para demonstrar manipulação de dados em formatos alternativos, utilizamos a seguinte função: </p>
+            <p><img class="pics" src="./img/ex2_2.png"></p>
+          </div>
+          <!-- Coluna da direita -->
+          <div class="col-md-5 px-4 py-3">
+            <p>Resultado:</p>
+              <p><img class="pics" src="./img/res2_2.png"></p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+<!-- Análise e manipulação de dados / Section 5
+   ================================================== -->
+    <section id="section_5">
+      <div class="container px-4 py-5">
+        <h3 class="text-center">Análise e manipulação de dados</h3>
+        <div class="row">
+
+          <!-- Coluna da esquerda -->
+          <div class="col-md-6 px-4 py-3">
+            <h3><i>O objetivo do exercício:</i></h3>
+            <p><i>O objetivo deste exercício é explorar e manipular o conjunto de dados do Titanic, utilizando técnicas de análise agregada para extrair insights relevantes sobre os fatores que influenciaram a sobrevivência dos passageiros. Para tal, serão aplicadas funções como <i>groupby, mean, sum</i> da biblioteca Pandas.</i></p>
+          </div>
+          <!-- Coluna da direita-->
+          <div class="col-md-6 px-4 py-3"></div>
+          <hr>
+          <i class="bi bi-1-square d-flex justify-content-center"></i>
+          <h4> Análise de Sobrevivência:</h4>
+          <!-- Coluna da esquerda -->
+          <div class="col-md-6 px-4 py-3">
+            <p>Calculamos a taxa de sobrevivência por classe (Pclass) e sexo (Sex)</p>
+            <p>
+              <img class="pics" src="./img/ex3_1.png"><br><br>
+              <img class="pics" src="./img/ex3_4.png">
+            </p>
+            <p>Dado que salvar mulheres e crianças era uma prioridade, não é surpreendente que neste conjunto de dados os resultados mostrem diferenças acentuadas nas taxas de sobrevivência. Mas as descobertas também sugerem que a classe social também foi um fator determinante na sobrevivência durante o desastre do Titanic.</p>
+          </div>
+          <!-- Coluna da direita -->
+          <div class="col-md-6 px-4 py-3">
+            <p>Resultado:</p>
+            <p><img class="pics" src="./img/res3_1.png"></p>
+            <p>
+              <ul>              
+                <li><b>Taxa de sobrevivência por sexo:</b><br>Nesta amostra, a taxa de sobrevivência das mulheres foi de 100%, indicando que todas as passageiras desta lista sobreviveram ao acidente. Por outro lado, a taxa de sobrevivência dos homens foi de 0%, indicando que nenhum dos homens incluídos na amostra sobreviveu.</li>
+                <li><b>Taxa de sobrevivência por classe:</b><br> 1ª Classe: A taxa de sobrevivência foi de 46.73%, indicando melhores condições de segurança para passageiros da classe mais alta.<br>
+                  2ª Classe: A taxa de sobrevivência foi de 32.26%, inferior à da 1ª classe, mas ainda significativa.<br>
+                  3ª Classe: A taxa de sobrevivência foi de 33.03%, surpreendentemente ligeiramente superior à da 2ª classe, apesar das condições mais modestas associadas a esta classe.</li>
+                <li><b>Relação entre idade e sobrevivência:</b><br> A idade revelou-se um fator importante, especialmente no caso das crianças e jovens (de 0 a 18 anos), que apresentaram uma probabilidade maior de sobrevivência (41.46%). 
+                  Por outro lado, entre os passageiros mais velhos (de 65 anos) desta amostra, a taxa de sobrevivência foi de 0%, possivelmente devido a limitações físicas ou priorização de outros grupos.
+                  <br> Os passageiros adultos com idade entre 18 e 65 anos nesta amostra, a taxa de sobrevivência foi de 37,72%.</li>
+              </ul>
+            </p>
+          </div>
+          <hr>
+          <i class="bi bi-2-square d-flex justify-content-center"></i>
+          <h4> Análise de Tarifa e Classe:</h4>
+          <!-- Coluna da esquerda -->
+          <div class="col-md-6 px-4 py-3">
+            <p>Calculamos a tarifa média por classe e sexo:</p>
+            <p><img class="pics" src="./img/ex3_2.png"></p>
+            <p>Identificamos correlações entre a tarifa (Fare) e a sobrevivência</p>
+            <p><img class="pics" src="./img/ex3_3.png"></p>
+          </div>
+          <!-- Coluna da direita -->
+          <div class="col-md-6 px-4 py-3">
+            <p>Resultado:</p>
+            <p><img class="pics" src="./img/res3_2.png"></p>
+            <p>A análise da tabela exibida apresenta as seguintes informações e resultados:</p>
+            <p>
+              <ul>              
+                <li><b>Tarifa Média por Classe e Sexo:</b><br>A tabela mostra a tarifa média (Average Fare) paga pelos passageiros em cada classe (Pclass), separada por sexo (Sex).</li>
+                <li><b>Tarifa Média Geral por Classe:</b><br>As linhas rotuladas como "Both" indicam a tarifa média geral para todos os sexos em uma determinada classe.</li>
+                <li><b>Tarifa Média Geral por Sexo:</b><br>As linhas rotuladas como "Total" fornecem a tarifa média paga por todos os passageiros do sexo.</li>
+                <li><b>Correlação entre Tarifa e Sobrevivência:</b><br>A correlação entre tarifa e sobrevivência é indicada pelo coeficiente de correlação de 0.19, mostrado abaixo da tabela.</li>
+              </ul>
+            </p>
+            <p>Tendo em conta estes resultados, podemos concluir o seguinte:</p>
+            <p>
+              <ul>
+                <li>Passageiros da 1ª classe, especialmente mulheres, pagaram tarifas mais altas e podem ter tido maior probabilidade de sobrevivência.</li>
+                <li>A diferença de tarifas médias por sexo e classe pode refletir desigualdades socioeconômicas e o impacto na sobrevivência.</li>
+                <li>A correlação positiva, embora fraca, confirma uma tendência entre tarifas maiores e maior chance de sobrevivência.</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Visualização de dados / Section 6
+   ================================================== -->
+    <section id="section_6">
+      <div class="container px-4 py-5">
+        <h3 class="text-center">Visualização de dados</h3>
+        <div class="row">
+          <div class="col-md-6 px-4 py-3">
+            <h3><i>O objetivo do exercício:</i></h3>
+            <p><i>O objetivo é criar gráficos que permitam identificar padrões e relações entre variáveis, analisando sobrevivência por classe e sexo, correlações entre idade, tarifa e sobrevivência, e a distribuição de variáveis como idade e tarifa.</i></p>
+          </div>
+        </div>
+        <hr />
+        <!-- ----- Buttons ---------------------------  -->
+        <div class="d-flex align-items-start">
+          <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <button class="nav-link active" id="v-pills-1-tab" data-bs-toggle="pill" data-bs-target="#v-pills-1" type="button" role="tab" aria-controls="v-pills-1" aria-selected="true"><b>Tendências Temporais</b></button>
+            <button class="nav-link" id="v-pills-2-tab" data-bs-toggle="pill" data-bs-target="#v-pills-2" type="button" role="tab" aria-controls="v-pills-2" aria-selected="false"><b>Correlação entre Variáveis</b></button>
+            <button class="nav-link" id="v-pills-3-tab" data-bs-toggle="pill" data-bs-target="#v-pills-3" type="button" role="tab" aria-controls="v-pills-3" aria-selected="false"><b>Distribuição das Variáveis</b></button>
+          </div>
+          <!-- ----- Tendências Temporais ---------------------------  -->
+          <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active text-center" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab" tabindex="0">
+              <h4>Distribuição de Sobreviventes por Classe e Sexo</h4>
+              <p>Este gráfico de barras ilustra o número de sobreviventes agrupados por classe socioeconômica (Pclass) e sexo (Sex).</p>
+              <p><img src="./img/cod_graf_1.png" width="700px"></p>
+              <p>Resultado:</p>
+              <p><img src="./img/graf_1.png" width="500px"></p>
+              <p>Como já dissemos antes, porque salvar mulheres e crianças era uma prioridade, o gráfico mostra claramente a diferença de sobrevivência entre homens e mulheres em cada classe. Nesta amostra, a taxa de sobrevivência das mulheres foi de 100%, o que significa que nenhum homem sobreviveu.</p>
+            </div>
+            <!-- ----- Correlação entre Variáveis ---------------------------  -->
+            <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-2-tab" tabindex="0">
+              <div class="tab-pane fade show active text-center" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab" tabindex="0">
+                <h4>Correlação entre Idade, Tarifa e Sobreviveu</h4>
+                <p>Este gráfico de dispersão (scatter plot) mostra a relação entre a idade dos passageiros (Age) e a tarifa paga pelo bilhete (Fare), com cores indicando se o passageiro sobreviveu ou não.</p>
+                <p><img src="./img/cod_graf_2.png" width="700px"></p>
+                <p>Resultado:</p>
+                <p><img src="./img/graf_2.png" width="600px"></p>
+                <p>Gráficos de dispersão (scatter plots) evidenciaram correlação positiva entre tarifas altas e sobrevivência.</p>
+              </div>
+            </div>
+            <!-- ----- Distribuição das Variáveis ---------------------------  -->
+            <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab" tabindex="0">
+              <div class="tab-pane fade show active text-center" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab" tabindex="0">
+                <h4>Distribuição de Sobreviventes por Classe e Sexo</h4>
+                
+                <p><img src="./img/cod_graf_3.png" width="700px"></p>
+                <p>Resultados:</p>
+                <p>Este histograma mostra a distribuição da idade dos passageiros do Titanic.
+                  <br> (Onde o valor zero significa que quase 100 pessoas na amostra não têm a idade especificada.)
+                </p>
+                <p><img src="./img/graf_3.png" width="600px"></p>
+                <p>Este histograma apresenta a distribuição das tarifas pagas pelos passageiros.
+                  <br> (Onde o valor zero significa que quase 250 pessoas na amostra não têm a tarifa especificada.)
+                </p>
+                <p><img src="./img/graf_4.png" width="600px"></p>
+                <p>Este gráfico de barras mostra a contagem total de passageiros que sobreviveram e não sobreviveram.</p>
+                <p><img src="./img/graf_5.png" width="600px"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Exportação dos resultados / Section 7
+   ================================================== -->
+    <section id="section_7">
+    <div class="container px-4 py-5">
+      <h3 class="text-center">Exportação dos resultados</h3>
+      <div class="row">
+        <div class="col-md-6 px-4 py-3">
+          <h3><i>O objetivo do exercício:</i></h3>
+          <p><i>Guardar os dados e gráficos gerados durante a análise num ficheiro Excel e num relatório final, facilitando a partilha e documentação dos resultados obtidos.
+          </i></p>
+          <hr />
+          <p>Para salvar o DataFrame atualizado num novo ficheiro Excel, contendo todas as colunas, incluindo Idade_Milissegundos, usamos o seguinte comando:</p>
+          <p><img class="pics" src="./img/ex5.png"></p>
+        </div>
+        <div class="col-md-6 px-4 py-3">
+          <p>Resultado:</p>
+          <p><img class="pics" src="./img/excel.png"></p>
+          <div class="text-center">
+            <a href="https://github.com/VulpeOlesea/Projeto1_Ruben_e_Olesea/raw/refs/heads/main/titanic_milliseconds.xlsx" target="_blank"><button class="btn-dark">Download do ficheiro</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+<!-- Armazenamento numa Base de Dados / Section 8
+   ================================================== -->
+    <section id="section_8">
+    <div class="container px-4 py-5">
+      <h3 class="text-center">Armazenamento numa Base de Dados</h3>
+      <div class="row">
+        <div class="col-md-6 px-4 py-3">
+          <h3><i>O objetivo do exercício:</i></h3>
+          <p><i>Guardar o conjunto de dados analisado numa base de dados estruturada, garantindo a integridade e a possibilidade de futuras consultas ou análises.
+            <br> Este processo envolve:
+          </i></p>
+        </div>
+      </div>
+  
+      <!-- Accordion -->
+    
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        <!-- ----- Accordion section 1 ---------------------------  -->
+        <div id="acc1" class="accordion-item mx-2 my-2">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse1" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+              <i class="bi bi-1-square" id="accordion"> Conexão com a Base de Dados</i>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapse1" class="accordion-collapse collapse show">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <ul>
+                    <li>É estabelecida uma conexão com uma base de dados SQLite chamada titanic.db.</li>
+                    <li>Caso esta base de dados não exista, será criada automaticamente.</li>
+                    <li>O cursor é usado para executar comandos SQL na base de dados.</li>
+                  </ul>                
+                </div> 
+                <div class="col-md-6">
+                 <img class="pics" src="./img/ex6_1.png"> 
+                </div>               
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ----- Accordion section 2 ---------------------------  -->
+        <div id="acc2" class="accordion-item mx-2 my-2">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse2" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+              <i class="bi bi-2-square" id="accordion"> Criação da Tabela "passengers"</i>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapse2" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <p>Este comando cria a tabela passengers com as seguintes colunas:</p>
+                  <ul>
+                    <li><b>PassengerId:</b> Identificador único de cada passageiro.</li>
+                    <li><b>Survived:</b> Indica se o passageiro sobreviveu (1) ou não (0).</li>
+                    <li><b>Pclass:</b> Classe socioeconómica do passageiro (1ª, 2ª ou 3ª classe).</li>
+                    <li><b>Name:</b> Nome do passageiro.</li>
+                    <li><b>Sex:</b> Sexo do passageiro.</li>
+                    <li><b>Age:</b> Idade do passageiro.</li>
+                    <li><b>SibSp:</b> Número de irmãos/cônjuges a bordo.</li>
+                    <li><b>Parch:</b> Número de pais/filhos a bordo.</li>
+                    <li><b>Ticket:</b> Número do bilhete.</li>
+                    <li><b>Fare:</b> Tarifa paga pelo bilhete.</li>
+                    <li><b>Cabin:</b> Número da cabine.</li>
+                    <li><b>Embarked:</b> Porto de embarque (C = Cherbourg, Q = Queenstown, S = Southampton).</li>
+                    <li><b>Age_Milliseconds:</b> Idade do passageiro em milissegundos (uma nova coluna para análise adicional).</li>
+                  </ul>
+                  <p>O comando <b>IF NOT EXISTS</b> assegura que a tabela não será recriada se já existir.</p>                 
+                </div> 
+                <div class="col-md-6">
+                  <img class="pics" src="./img/ex6_2.png">  
+                </div>               
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ----- Accordion section 3 ---------------------------  -->
+        <div id="acc3" class="accordion-item mx-2 my-2">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse3" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+              <i class="bi bi-3-square" id="accordion"> Inserção dos Dados na Tabela</i>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapse3" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <ul>
+                    <li>O conjunto de dados armazenado no DataFrame <i>df</i> é inserido na tabela <i>passengers</i>.</li>
+                    <li>A opção <i>if_exists='replace'</i> garante que, se a tabela já existir, ela será substituída pelos novos dados.</li>
+                    <li>O argumento <i>index=False</i> assegura que o índice do DataFrame não será incluído como uma coluna adicional na tabela.</li>
+                  </ul>                
+                </div> 
+                <div class="col-md-6">
+                  <img class="pics" src="./img/ex6_3.png">  
+                </div> 
+              </div>              
+            </div>
+          </div>
+        </div>
+        <!-- ----- Accordion section 4 ---------------------------  -->
+        <div id="acc4" class="accordion-item mx-2 my-2">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse4" aria-expanded="false" aria-controls="panelsStayOpen-collapseFore">
+              <i class="bi bi-4-square" id="accordion"> Visualização dos Primeiros Registos</i>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapse4" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <ul>
+                    <li>O comando SQL <i>SELECT * FROM passengers LIMIT 5</i> seleciona os primeiros 5 registos da tabela <i>passengers</i>.</li>
+                    <li>Os resultados são recuperados com o método <i>fetchall()</i> e apresentados no terminal utilizando um ciclo <i>for</i>.</li>
+                  </ul>                
+                </div> 
+                <div class="col-md-6">
+                  <img class="pics" src="./img/ex6_4.png">  
+                </div> 
+              </div>              
+            </div>
+            <p>Resultado: <img class="pics" src="./img/res_6.png"></p>
+          </div>
+        </div>
+        <!-- ----- Accordion section 5 ---------------------------  -->
+        <div id="acc5" class="accordion-item mx-2 my-2">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse5" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
+              <i class="bi bi-5-square" id="accordion"> Fechar a Conexão</i>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapse5" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <ul>
+                    <li>Finalmente, a conexão com a base de dados é encerrada para liberar os recursos utilizados.</li>
+                  </ul>                
+                </div> 
+                <div class="col-md-6">
+                  <img class="pics" src="./img/ex6_5.png">  
+                </div> 
+              </div>              
+            </div>
+          </div>
+        </div>
+        <p>Este código demonstra o processo de integração de dados com uma base de dados SQLite. Ele automatiza a criação da tabela, o carregamento dos dados e a verificação inicial dos registos, assegurando que os dados estejam armazenados de forma estruturada e acessível para futuras análises ou consultas.</p>
+      </div>
+    </div>
+    </section>
+
+<!-- Análise Adicional / Section 9
+   ================================================== -->
+    <section id="section_9">
+      <div class="container px-4 py-5">
+        <h3 class="text-center">Análise Adicional</h3>
+        <div class="row">
+          <!-- Coluna da esquerda -->
+          <div class="col-md-6 px-4 py-3">
+            <h3><i>O objetivo do exercício:</i></h3>
+            <p><i>Explorar novas abordagens criativas e originais, adicionando variáveis ou realizando análises que tragam novos insights sobre os dados.
+            </i></p>
+          </div>
+          <!-- Coluna da direita -->
+          <div class="col-md-6 px-4 py-3">
+            <p>Para este exercício decidimos fazer as três análises seguintes:</p>
+            <ol>
+              <li>Análise de Famílias a Bordo</li>
+              <li>Análise de Passageiros com Cabines Registradas</li>
+              <li>Probabilidade de Sobrevivência por Porto de Embarque</li>
+            </ol>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <i class="bi bi-1-square d-flex justify-content-center"></i>
+            <!-- Coluna da esquerda -->
+          <div class="col-md-7 px-4 py-3">
+            <h4>Análise de Famílias a Bordo</h4>
+            <p>O objetivo desta análise foi examinar como o tamanho da família influenciou as chances de sobrevivência no desastre do Titanic. <br>
+              Divide os passageiros em três categorias:
+              <ul>
+                <li><b>"Apenas 1":</b> Passageiros que viajaram sozinhos (sem familiares).</li>
+                <li><b>"Pequena Família":</b> Famílias com 1 a 3 membros.</li>
+                <li><b>"Grande Família":</b> Famílias com 4 ou mais membros.</li>
+              </ul>
+            </p>
+            <img class="pics" src="./img/ex7_1.png">
+          </div>
+          <!-- Coluna da direita -->
+          <div class="col-md-5 px-4 py-3">
+            <p>Resultado:</p>
+            <p><img class="pics" src="./img/res7_1.png"></p>
+            <p>
+              <ul>
+                <li>Passageiros com famílias pequenas tiveram uma maior probabilidade de sobrevivência.</li>
+                <li>Passageiros sozinhos tiveram a menor taxa de sobrevivência, o que sugere que a presença de familiares pode ter aumentado as chances de sobreviver.</li>
+                <li>Famílias grandes tiveram uma taxa intermediária, possivelmente devido à dificuldade de evacuar em grupos maiores.</li>
+              </ul>
+            </p>
+          </div>
+        </div>   
+        <hr>
+         
+        <div class="row">
+          <i class="bi bi-2-square d-flex justify-content-center"></i>
+            <!-- Coluna da esquerda -->
+          <div class="col-md-7 px-4 py-3">
+            <h4>Análise de Passageiros com Cabines Registradas</h4>
+            <p>O objetivo desta análise foi avaliar se ter um número de cabine registado estava relacionado com uma maior chance de sobrevivência. <br>
+              Substituimos valores inválidos (N/A) por valores nulos (NaN) na coluna <i>Cabin</i>. E criamos uma nova coluna <i>CabinRegistered</i>, com as categorias:
+              <ul>
+                <li><b>"Com Cabine":</b> Passageiros com um número de cabine registado.</li>
+                <li><b>"Sem Cabine":</b> Passageiros sem um número de cabine.</li>
+              </ul>
+            </p>
+            <img class="pics" src="./img/ex7_2.png">
+          </div>
+          <!-- Coluna da direita -->
+          <div class="col-md-5 px-4 py-3">
+            <p>Resultado:</p>
+            <p><img class="pics" src="./img/res7_2.png"></p>
+            <p>
+              <ul>
+                <li>Passageiros com cabines registadas tiveram uma taxa de sobrevivência significativamente maior em comparação com os que não tinham cabines registadas.</li>
+                <li>Este resultado pode ser atribuído ao facto de que passageiros com cabines eram geralmente de classes mais altas, o que lhes dava prioridade durante o resgate.</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row">
+          <i class="bi bi-3-square d-flex justify-content-center"></i>
+            <!-- Coluna da esquerda -->
+          <div class="col-md-7 px-4 py-3">
+            <h4>Probabilidade de Sobrevivência por Porto de Embarque</h4>
+            <p>Esta análise investigou como o local* de embarque influenciou as chances de sobrevivência dos passageiros.<br>
+            *(Cherbourg (C), Queenstown (Q), Southampton (S))</p>
+            <img class="pics" src="./img/ex7_3.png">
+          </div>
+          <!-- Coluna da direita -->
+          <div class="col-md-5 px-4 py-3">
+            <p>Resultado:</p>
+            <p><img class="pics" src="./img/res7_3.png"></p>
+            <p>
+              <ul>
+                <li>Passageiros que embarcaram em <b>Queenstown (Q)</b> tiveram a maior taxa de sobrevivência.</li>
+                <li>Passageiros que embarcaram em <b>Southampton (S)</b> tiveram a menor taxa de sobrevivência.</li>
+                <li>Este padrão pode estar relacionado com as classes socioeconómicas predominantes nos portos de embarque:
+                  <ul>
+                    <li>Queenstown tinha uma maior proporção de passageiros em 3ª classe, mas estes podem ter embarcado em locais estratégicos do navio.</li>
+                  <li>Southampton foi o porto principal, onde embarcaram muitos passageiros da 3ª classe, que enfrentaram maiores dificuldades de sobrevivência.</li>
+                  </ul>
+                </li>
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Conclusões / Section 10
+   ================================================== -->
+   <section id="section_10">
+      <div class="row">
+        <div class="col-md-3 px-4 py-3"></div>
+        <div class="col-md-6 px-4 py-3" id="conclusion">
+          <h2 id="titulo_1">Conclusões</h2>
+          <p>O objetivo deste projeto foi utilizar as bibliotecas Python, como Pandas e Matplotlib, para analisar os fatores que influenciaram a sobrevivência dos passageiros do "Titanic".</p>
+          <p>Este trabalho demonstrou como os métodos de análise de dados permitem extrair informações valiosas de um conjunto de dados aparentemente simples. Destacou a relevância de variáveis como género, idade, classe social e tarifa na determinação dos padrões de sobrevivência. Para além de oferecer uma visão histórica da tragédia, o projeto evidenciou a aplicação prática de ferramentas de análise de dados, consolidando competências técnicas e aprofundando o conhecimento destas tecnologias.</p>
+          <p>O projeto proporcionou uma experiência valiosa no trabalho com dados reais, incluindo a gestão de valores em falta, a identificação de padrões ocultos e a criação de visualizações informativas. Os desafios encontrados, como o tratamento de dados incompletos e o desenvolvimento de gráficos claros e úteis, foram superados com um processo estruturado e iterativo de análise. Isto reforçou a nossa compreensão da importância da precisão e do rigor na manipulação de dados.</p>
+          <p>No geral, o projeto atingiu os seus objetivos: aprofundou os conhecimentos sobre os fatores que influenciaram a sobrevivência dos passageiros do "Titanic", demonstrou o valor da análise de dados rigorosa na resolução de problemas complexos e contribuiu para o desenvolvimento de competências práticas em programação e ferramentas analíticas. Os resultados sublinham que os métodos modernos de análise de dados continuam a ser uma parte essencial da tomada de decisões, do estudo de eventos históricos e da geração de novos conhecimentos.</p>
+        </div>
+        <div class="col-md-3 px-4 py-3"></div>
+      </div>
+  </section>
+
+<!-- Sobre nós / Section 11
+   ================================================== -->
+   <section id="section_11">
+    <div class="container px-4 py-5">
+      <h2 id="titulo_1">Sobre nós</h2>
+      <div class="row">
+
+        <!-- Sobre nós -->
+        <div class="col-md-4 px-4 py-3">
+          <h4>Sobre nós</h4>
+          <hr>
+          <p><b>Curso: </b>Curso de Técnico/a Especialista em Tecnologias e Programação de Sistemas de Informação</p>
+          <p><b>UFCD: </b>5417 - Programação para a WEB - Servidor (server-side)</p>
+          <p><b>Turma: </b>TPSI PL 1223</p>
+          <p><b>Trabalho de Grupo: </b>Projeto #1 - Análise de dados do Titanic</p>
+          <p><b>Formador: </b>Nelson Santos</p>
+          <p><b>Formandos: </b>Olesea Vulpe, Rúben Fonseca</p>
+        </div>
+
+        <!-- Onde estamos -->
+        <div class="col-md-4 px-4 py-3">
+          <h4>Onde estamos</h4>
+          <hr>
+          <!-- Mapa -->
+          <div class="map-responsive">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3118.9728556687705!2d-9.0038873!3d38.5804729!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd194622e5ad46d1%3A0x123b3f86b5ed915a!2sAcademia%20de%20Forma%C3%A7%C3%A3o%20ATEC%20-%20Palmela!5e0!3m2!1spt-PT!2spt!4v1732237129428!5m2!1spt-PT!2spt" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+
+        <!-- Código fonte do projeto -->
+        <div class="col-md-4 px-4 py-3">
+          <h4>Código fonte do projeto</h4>
+          <hr>
+          <i class="bi bi-github d-flex justify-content-center"></i>
+          <p class="text-center">
+            Código fonte do projeto no GitHub:
+            <a href="https://github.com/VulpeOlesea/Projeto1_Ruben_e_Olesea" target="_blank"><button class="btn-dark">Ver código</button></a>
+          </p>
+          <div class="text-center">
+            Código fonte do site no GitHub:
+            <a href="https://github.com/VulpeOlesea/Projeto-Titanic-_Ruben_e_Olesea" target="_blank"><button class="btn-dark">Ver código</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+   
+<!-- Footer
+   ================================================== -->
+   <footer class="py-3">
+    <div class="container">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+        <li class="nav-item"><a href="#section_1" class="nav-link px-2 text-body-secondary">Introdução</a></li>
+        <li class="nav-item"><a href="#section_2" class="nav-link px-2 text-body-secondary">Sobre "Titanic"</a></li>
+        <li class="nav-item"><a href="#section_3" class="nav-link px-2 text-body-secondary">Análise de dados</a></li>
+        <li class="nav-item"><a href="#section_10" class="nav-link px-2 text-body-secondary">Conclusões</a></li>
+        <li class="nav-item"><a href="#section_11" class="nav-link px-2 text-body-secondary">Sobre nós</a></li>
+      </ul>
+      <p class="text-center text-body-secondary">© 2025 ATEC | Design by Olesea Vulpe e Rúben Fonseca</p>
+    </div>
+  </footer>
+
+  <!-- Script JS Bootstrap
+  ================================================== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  
+</body>
+
+</html>
